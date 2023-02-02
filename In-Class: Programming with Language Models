@@ -1,23 +1,12 @@
-def sentiment_analysis(text):
-    positive_words = ["good", "great", "excellent", "positive", "happy", "joyful", "pleased"]
-    negative_words = ["bad", "terrible", "awful", "negative", "unhappy", "sad", "displeased"]
-
-    text_words = text.lower().split()
-    positive_count = 0
-    negative_count = 0
-    for word in text_words:
-        if word in positive_words:
-            positive_count += 1
-        elif word in negative_words:
-            negative_count += 1
-
-    if positive_count > negative_count:
-        return "Positive"
-    elif positive_count < negative_count:
-        return "Negative"
-    else:
-        return "Neutral"
+from textblob import TextBlob
 
 text = input("Enter a text string: ")
-sentiment = sentiment_analysis(text)
+analysis = TextBlob(text)
+if analysis.sentiment.polarity > 0:
+    sentiment = "Positive"
+elif analysis.sentiment.polarity == 0:
+    sentiment = "Neutral"
+else:
+    sentiment = "Negative"
+
 print("Sentiment:", sentiment)
